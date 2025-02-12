@@ -1,15 +1,26 @@
 <div class="container mx-auto p-4">
   <div class="grid grid-cols-2 gap-5">
     @for (item of listArticle; track item) {
-    <div class="h-[200px]" (click)="onDetail()">
+    <div class="h-[250px] cursor-pointer" (click)="onDetail()">
       <div class="flex h-full">
-        <div class="w-[200px] flex-shrink-0">
+        <div class="w-[250px] flex-shrink-0">
           <img class="h-full object-cover" [src]="url + item?.Thumbnail?.url" />
         </div>
         <div class="flex-grow bg-gray-100">
-          <div class="flex flex-col p-3 gap-3 flex-grow">
-            <div class="font-bold">{{ item?.Title }}</div>
-            <div>{{ item?.Desc }}</div>
+          <div class="flex flex-col gap-3 h-full p-3">
+            <div class="font-bold text-2xl">{{ item?.Title }}</div>
+            <div class="line-clamp-3 text-sm ">{{ item?.Desc }}</div> 
+            <div class="flex gap-3 mt-auto">
+              @for (contentType of item?.content_types; track contentType) {
+                <div 
+                [ngClass]="{ 
+                  'bg-[#469FB2]': contentType?.Name === 'Article',
+                  'bg-[#856299]': contentType?.Name === 'Whitepaper',
+                  'bg-[#F3B230]': contentType?.Name === 'Video'
+                }"
+                class="py-1 px-2 rounded-[3px] text-white text-sm">{{contentType?.Name}}</div>
+              }
+            </div>
           </div>
         </div>
       </div>

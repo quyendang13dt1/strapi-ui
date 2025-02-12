@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleService } from '../service/article.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-article-list',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './article-list.component.html',
   styleUrl: './article-list.component.scss'
 })
