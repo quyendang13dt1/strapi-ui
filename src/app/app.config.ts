@@ -8,3 +8,6 @@ import { provideHttpClient } from '@angular/common/http';
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(withEventReplay()), provideHttpClient()]
 };
+
+export const URL_API = 'http://localhost:1337/api/';
+export const URL_IMAGE = 'http://localhost:1337';
