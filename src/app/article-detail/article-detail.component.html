@@ -1,1 +1,11 @@
-<p>article-detail works!</p>
+<app-header></app-header>
+<div class="flex flex-col container py-5 gap-5">
+  <div class="text-[40px] font-bold">{{ detail?.Title }}</div>
+  <div>
+    <i class="fa-light fa-calendar-clock"></i> {{detail?.infoLink?.[0]?.Date}}
+  </div>
+  <div>
+    <img class="h-full object-cover" [src]="URL_IMAGE + detail?.Banner?.url" />
+  </div>
+  <div [innerHTML]="detail?.Content"></div>
+</div>

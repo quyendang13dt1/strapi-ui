@@ -12,10 +12,9 @@ export class ArticleService {
     return this.http.get<any[]>(`${this.apiUrl}articles?populate=*`);
   }
 
-  getKnowledgeHub() {
-    return this.http.get<any[]>(`http://localhost:1337/api/header`);
-    
-    // return this.http.get<any[]>(`${this.apiUrl}knowledge-hubs?populate=*`);
+  getArticleDetail(id: string) {
+    return this.http.get<any[]>(
+      `${this.apiUrl}articles/${id}?customPopulate=nested`
+    );
   }
-
 }

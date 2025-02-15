@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center p-4">
+<div class="flex justify-between items-center container mx-auto py-5">
   <img
     [src]="URL_IMAGE + headerData?.Logo?.url"
     routerlink="#"
@@ -9,7 +9,7 @@
   />
   <div class="flex gap-5">
     @for (item of headerData?.Menu; track item) {
-    <div class="font-bold">
+    <div class="font-bold cursor-pointer" (click)="openPages(item)">
       {{ item?.Text }}
     </div>
     }
