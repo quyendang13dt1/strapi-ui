@@ -5,8 +5,11 @@
     <i class="fa-light fa-calendar-clock"></i> {{detail?.infoLink?.[0]?.Date}}
   </div>
   @if(detail?.Banner?.url) {
-  <div>
-    <img class="h-full object-cover" [src]="URL_IMAGE + detail?.Banner?.url" />
+  <div class="flex justify-center items-center">
+    <img
+      class="h-[500px] object-cover"
+      [src]="URL_IMAGE + detail?.Banner?.url"
+    />
   </div>
   } @for (item of innerHTMLData; track item) { @switch (item?.type) { @case
   ('iframe') {
