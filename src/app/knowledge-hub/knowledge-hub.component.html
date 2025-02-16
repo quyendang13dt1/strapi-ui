@@ -13,19 +13,38 @@
   </div>
 </div>
 <!-- <app-blog-list [listBlog]="knowLedHubData?.ListBlog"></app-blog-list> -->
+<div class="container flex gap-3 py-5 items-center">
+  <div><i class="fa-light fa-filter"></i> Filter:</div>
+  @for (item of filterData; track item) {
+  <div
+    class="cursor-pointer"
+    (click)="selectFilter(item)"
+    style="border: 1px solid #a9bac7; border-radius: 4px; padding: 5px 10px"
+    [ngStyle]="
+      item?.isSelected ? { 'background-color': '#428d57', color: 'white' } : {}
+    "
+  >
+    {{ item?.Text }}
+  </div>
+  }
+</div>
 
-<div class="container mx-auto p-4">
+<div class="container mx-auto p-4" *ngIf="listBlog?.length">
   <div class="grid grid-cols-2 gap-5">
-    @for (item of knowLedHubData?.ListBlog; track item) {
-    <div class="h-[250px] cursor-pointer" (click)="onDetail(item)">
+    @for (item of listBlog; track item) {
+    <div class="h-[357px] cursor-pointer" (click)="onDetail(item)">
       <div class="flex h-full">
-        <div class="w-[250px] flex-shrink-0">
+        <div class="w-[300px] flex-shrink-0">
+          @if(!item?.Iframe) {
           <img
             class="h-full object-cover"
             [src]="URL_IMAGE + item?.Image?.url"
           />
+          } @if(item?.Iframe) {
+          <app-iframe [src]="'https://app.7taps.com/GRw8kTVN8es0'"></app-iframe>
+          }
         </div>
-        <div class="flex-grow bg-gray-100">
+        <div class="mw-[300px] flex-grow bg-gray-100">
           <div class="flex flex-col gap-3 h-full p-3">
             <div class="font-bold text-2xl">{{ item?.Title }}</div>
             <div class="line-clamp-3 text-sm">{{ item?.Desc }}</div>
@@ -50,3 +69,10 @@
     }
   </div>
 </div>
+<div
+  class="container mx-auto p-4 flex justify-center pt-[30px] pb-[70px]"
+  *ngIf="!listBlog?.length"
+>
+  No Data
+</div>
+<app-footer></app-footer>

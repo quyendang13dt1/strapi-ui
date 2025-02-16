@@ -1,17 +1,22 @@
-<div class="flex justify-between items-center container mx-auto py-5">
-  <img
-    [src]="URL_IMAGE + headerData?.Logo?.url"
-    routerlink="#"
-    alt=""
-    class="logo"
-    tabindex="0"
-    width="150px"
-  />
-  <div class="flex gap-5">
-    @for (item of headerData?.Menu; track item) {
-    <div class="font-bold cursor-pointer" (click)="openPages(item)">
-      {{ item?.Text }}
+<div style="box-shadow: 0 3px 6px #00000029; background-color: #eeee">
+  <div class="flex justify-between items-center container mx-auto py-5">
+    <img
+      [src]="URL_IMAGE + headerData?.Logo?.url"
+      routerlink="#"
+      alt=""
+      class="logo"
+      tabindex="0"
+      width="150px"
+    />
+    <div class="flex gap-5">
+      @for (item of headerData?.Menu; track item) {
+      <div class="cursor-pointer font-bold" (click)="openPages(item)">
+        {{ item?.Text }}
+        @if(item?.Text === 'Knowledge Hub'){
+        <hr />
+        }
+      </div>
+      }
     </div>
-    }
   </div>
 </div>

@@ -41,3 +41,41 @@
   margin-right: auto;
   margin-left: auto;
 }
+
+html,
+body {
+  overflow: auto !important;
+  height: auto !important;
+}
+
+a {
+  color: #007bff;
+}
+
+.btn-green {
+  color: #fff;
+  background: #428d57 0% 0% no-repeat padding-box;
+  border: 1px solid #428d57;
+  border-radius: 4px;
+  opacity: 1;
+  font: normal normal medium 18px / 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+}
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold;
+  }
+  h2 {
+    @apply text-3xl font-bold;
+  }
+  h3 {
+    @apply text-2xl font-bold;
+  }
+  h4 {
+    @apply text-xl font-bold;
+  }
+}

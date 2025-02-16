@@ -12,6 +12,10 @@ export class LayoutService {
     return this.http.get<any[]>(`${URL_API}header?populate=*`);
   }
 
+  getFooter() {
+    return this.http.get<any[]>(`${URL_API}footer?customPopulate=nested`);
+  }
+
   knowledgeHub() {
     return this.http.get<any[]>(
       `${URL_API}knowledge-hubs?customPopulate=nested`

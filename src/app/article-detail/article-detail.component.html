@@ -4,8 +4,15 @@
   <div>
     <i class="fa-light fa-calendar-clock"></i> {{detail?.infoLink?.[0]?.Date}}
   </div>
+  @if(detail?.Banner?.url) {
   <div>
     <img class="h-full object-cover" [src]="URL_IMAGE + detail?.Banner?.url" />
   </div>
-  <div [innerHTML]="detail?.Content"></div>
+  } @for (item of innerHTMLData; track item) { @switch (item?.type) { @case
+  ('iframe') {
+  <app-iframe [src]="item?.src" [styleObj]="item?.style"></app-iframe>
+  } @default {
+  <!-- <div [innerHTML]="item?.data"></div> -->
+  <app-html-render [stringHtml]="item?.data"></app-html-render>
+  } } }
 </div>
