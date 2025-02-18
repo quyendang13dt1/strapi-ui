@@ -1,2 +1,19 @@
 <!-- <app-article-list></app-article-list> -->
+
+@if(isLoading) {
+    <div style="display: flex;
+    justify-content: center;
+    align-items: center; height: 100vh">
+    <img
+    class="object-cover"
+    style="height: 50px"
+    [src]="'https://media.tenor.com/-n8JvVIqBXkAAAAM/dddd.gif'"
+    />
+    
+    </div>
+}
+
+
+<app-header></app-header>
 <router-outlet></router-outlet>
+<app-footer></app-footer>

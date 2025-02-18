@@ -1,16 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ArticleService } from '../service/article.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../header/header.component';
 import { LayoutService } from '../service/layout.service';
 import { URL_IMAGE } from '../app.config';
 import { IframeComponent } from '../iframe/iframe.component';
-import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-knowledge-hub',
-  imports: [CommonModule, HeaderComponent, IframeComponent, FooterComponent],
+  imports: [CommonModule, IframeComponent],
   templateUrl: './knowledge-hub.component.html',
   styleUrl: './knowledge-hub.component.scss',
 })
@@ -20,6 +17,7 @@ export class KnowledgeHubComponent {
   knowLedHubData: any;
   filterData: any[] = [];
   listBlog: any[] = [];
+  isLoading = false;
   constructor(
     private _LayoutService: LayoutService,
     private _Router: Router,
@@ -31,6 +29,7 @@ export class KnowledgeHubComponent {
   }
 
   getData() {
+    this.isLoading = true;
     this._LayoutService.knowledgeHub().subscribe((rs: any) => {
       this.knowLedHubData = rs?.data?.[0];
       this.filterData = this.knowLedHubData?.Filter?.Type?.map((x: any) => {
@@ -38,6 +37,7 @@ export class KnowledgeHubComponent {
         return x;
       });
       this.listBlog = this.knowLedHubData.ListBlog;
+      this.isLoading = false;
     });
   }
 

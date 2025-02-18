@@ -1,21 +1,33 @@
-<app-header></app-header>
-<div class="flex flex-col container py-5 gap-5">
-  <div class="text-[40px] font-bold">{{ detail?.Title }}</div>
-  <div>
-    <i class="fa-light fa-calendar-clock"></i> {{detail?.infoLink?.[0]?.Date}}
-  </div>
-  @if(detail?.Banner?.url) {
-  <div class="flex justify-center items-center">
+@if(isLoading) {
+  <div style="display: flex;
+      justify-content: center;
+      align-items: center; height: calc(100vh - 300px);">
     <img
-      class="h-[500px] object-cover"
-      [src]="URL_IMAGE + detail?.Banner?.url"
-    />
+    class="object-cover"
+    style="height: 50px"
+    [src]="'https://media.tenor.com/-n8JvVIqBXkAAAAM/dddd.gif'"
+  />
   </div>
-  } @for (item of innerHTMLData; track item) { @switch (item?.type) { @case
-  ('iframe') {
-  <app-iframe [src]="item?.src" [styleObj]="item?.style"></app-iframe>
-  } @default {
-  <!-- <div [innerHTML]="item?.data"></div> -->
-  <app-html-render [stringHtml]="item?.data"></app-html-render>
-  } } }
-</div>
+} @else {
+  <div class="flex flex-col container py-5 gap-5">
+    <div class="text-[40px] font-bold">{{ detail?.Title }}</div>
+    <div>
+      <i class="fa-light fa-calendar-clock"></i> {{detail?.infoLink?.[0]?.Date}}
+    </div>
+    @if(detail?.Banner?.url) {
+    <div class="flex justify-center items-center">
+      <img
+        class="w-full object-cover"
+        [src]="URL_IMAGE + detail?.Banner?.url"
+      />
+    </div>
+    } @for (item of innerHTMLData; track item) { @switch (item?.type) { @case
+    ('iframe') {
+    <app-iframe [src]="item?.src" [styleObj]="item?.style"></app-iframe>
+    } @default {
+    <!-- <div [innerHTML]="item?.data"></div> -->
+    <app-html-render [stringHtml]="item?.data"></app-html-render>
+    } } }
+  </div>
+}
+

@@ -1,6 +1,7 @@
-<div style="box-shadow: 0 3px 6px #00000029; background-color: #eeee">
-  <div class="flex justify-between items-center container mx-auto py-5">
-    <img
+<div style="box-shadow: -1px -4px 6px #00000029;" class="pt-2">
+  <div class="flex justify-between  container mx-auto py-5">
+    <div>
+      <img
       [src]="URL_IMAGE + data?.logo?.url"
       routerlink="#"
       alt=""
@@ -8,13 +9,15 @@
       tabindex="0"
       width="150px"
     />
-    <div class="flex gap-5 ml-atuo gap-3">
+    </div>
+    
+    <div class="flex gap-5 ml-atuo gap-5">
       @for (item of data?.Menu; track item) {
       <div class="cursor-pointer flex flex-col gap-3" (click)="openPages(item)">
-        <div class="mb-1 font-bold">{{ item?.Name }}</div>
+        <div class="mb-1 font-bold text-[16px]">{{ item?.Name }}</div>
         <hr style="width: 60px" />
         @for (subItem of item?.Submenu; track subItem) {
-        <div>
+        <div class="text-[14px]">
           {{ subItem?.Name }}
         </div>
         }

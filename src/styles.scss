@@ -36,16 +36,48 @@
 
 .container {
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: var(--bs-gutter-x, 12px);
+  padding-left: var(--bs-gutter-x, 12px);
   margin-right: auto;
   margin-left: auto;
+}
+
+// Responsive containers
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
 }
 
 html,
 body {
   overflow: auto !important;
   height: auto !important;
+  font-size: 18px;
 }
 
 a {
@@ -79,3 +111,12 @@ a {
     @apply text-xl font-bold;
   }
 }
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+  .image {
+    display: flex;
+    justify-content: center;
+  }

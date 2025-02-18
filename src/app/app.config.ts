@@ -22,5 +22,5 @@ export const appConfig: ApplicationConfig = {
 // export const URL_API = 'http://localhost:1337/api/';
 // export const URL_IMAGE = 'http://localhost:1337';
 
-export const URL_API = 'https://strapi-project-32d4.onrender.com/api/';
-export const URL_IMAGE = 'https://strapi-project-32d4.onrender.com';
+export const URL_API = 'https://whimsical-chickens-74bb446fd3.strapiapp.com/api/';
+export const URL_IMAGE = '';

@@ -1,4 +1,4 @@
-<div style="box-shadow: 0 3px 6px #00000029; background-color: #eeee">
+<div style="box-shadow: 0 3px 6px #00000029;">
   <div class="flex justify-between items-center container mx-auto py-5">
     <img
       [src]="URL_IMAGE + headerData?.Logo?.url"
@@ -8,9 +8,11 @@
       tabindex="0"
       width="150px"
     />
-    <div class="flex gap-5">
+    <div class="flex gap-[20px]">
       @for (item of headerData?.Menu; track item) {
-      <div class="cursor-pointer font-bold" (click)="openPages(item)">
+      <div class="cursor-pointer font-bold text-[16px] px-3" (click)="openPages(item)"
+      [class.active-link]="item?.Text === 'Knowledge Hub'"
+      >
         {{ item?.Text }}
         @if(item?.Text === 'Knowledge Hub'){
         <hr />

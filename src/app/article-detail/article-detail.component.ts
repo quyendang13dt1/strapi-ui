@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { URL_IMAGE } from '../app.config';
-import { HeaderComponent } from '../header/header.component';
 import { HtmlRenderComponent } from '../html-render/html-render.component';
 import { IframeComponent } from '../iframe/iframe.component';
 import { ArticleService } from '../service/article.service';
 
 @Component({
   selector: 'app-article-detail',
-  imports: [HeaderComponent, IframeComponent, HtmlRenderComponent],
+  imports: [IframeComponent, HtmlRenderComponent],
   templateUrl: './article-detail.component.html',
   styleUrl: './article-detail.component.scss',
 })
@@ -17,6 +16,7 @@ export class ArticleDetailComponent {
   detail: any;
   URL_IMAGE = URL_IMAGE;
   innerHTMLData: any = [];
+  isLoading = false;
   constructor(
     private route: ActivatedRoute,
     private _ArticleService: ArticleService
@@ -24,11 +24,9 @@ export class ArticleDetailComponent {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
-    console.log('Route Param ID:', this.id);
+    this.isLoading = true;
     this._ArticleService.getArticleDetail(this.id).subscribe((rs: any) => {
       this.detail = rs?.data;
-      console.log('this._ArticleService.getArticleDetail', this.detail);
-
       const splitParts = this.detail?.Content.split(
         /<pre><code class="language-plaintext">|<\/code><\/pre>/
       );
@@ -44,7 +42,7 @@ export class ArticleDetailComponent {
           };
         })
         .filter((x: any) => x?.data);
-      console.log('innerHTMLData', this.innerHTMLData);
+        this.isLoading = false;
     });
   }
 
