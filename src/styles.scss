@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@use "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+// @use "tailwindcss";
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
 
 // @media (min-width: 768px) {
 //   .container,
@@ -65,17 +65,17 @@ a {
   padding: 10px 20px;
 }
 
-@layer base {
-  h1 {
-    @apply text-4xl font-bold;
-  }
-  h2 {
-    @apply text-3xl font-bold;
-  }
-  h3 {
-    @apply text-2xl font-bold;
-  }
-  h4 {
-    @apply text-xl font-bold;
-  }
-}
+// @layer base {
+//   h1 {
+//     @apply text-4xl font-bold;
+//   }
+//   h2 {
+//     @apply text-3xl font-bold;
+//   }
+//   h3 {
+//     @apply text-2xl font-bold;
+//   }
+//   h4 {
+//     @apply text-xl font-bold;
+//   }
+// }
