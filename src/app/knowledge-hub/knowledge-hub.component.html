@@ -1,18 +1,26 @@
 @if(isLoading) {
-  <div style="display: flex;
-      justify-content: center;
-      align-items: center; height: calc(100vh - 300px);">
-    <img
+<div
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 300px);
+  "
+>
+  <img
     class="object-cover"
     style="height: 50px"
     [src]="'https://media.tenor.com/-n8JvVIqBXkAAAAM/dddd.gif'"
   />
-  </div>
-}
-
-@if(!isLoading) {
+</div>
+} @if(!isLoading) {
 <div
   class="h-[600px] flex flex-col justify-center items-center gap-4"
+  style="
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  "
   [ngStyle]="{ 'background-image': 'url(' + URL_IMAGE + knowLedHubData?.Banner?.Background?.[0]?.url + ')' }"
 >
   <div
@@ -24,6 +32,7 @@
     {{ knowLedHubData?.Banner?.Desc }}
   </div>
 </div>
+
 <!-- <app-blog-list [listBlog]="knowLedHubData?.ListBlog"></app-blog-list> -->
 <div class="container flex gap-3 py-5 items-center" *ngIf="knowLedHubData">
   <div><i class="fa-light fa-filter"></i> Filter:</div>
@@ -31,7 +40,12 @@
   <div
     class="cursor-pointer"
     (click)="selectFilter(item)"
-    style="border: 1px solid #a9bac7; border-radius: 4px; padding: 5px 10px; font-weight: 200;"
+    style="
+      border: 1px solid #a9bac7;
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-weight: 200;
+    "
     [ngStyle]="
       item?.isSelected ? { 'background-color': '#428d57', color: 'white' } : {}
     "
