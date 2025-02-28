@@ -25,6 +25,8 @@ export class KnowledgeHubComponent {
     private cdr: ChangeDetectorRef
   ) {}
   ngOnInit(): void {
+    const queryParamValue = this._ActivatedRoute.snapshot.queryParamMap.get('status');
+    console.log('queryParamValue', queryParamValue);
     this.getData();
   }
 
