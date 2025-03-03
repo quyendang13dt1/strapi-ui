@@ -45,13 +45,13 @@ export class ArticleDetailComponent {
       .subscribe(([rs1, rs2]: any) => {
         this.detail = rs1.data;
         this.detailRelation = rs2?.data;
-        const splitParts = this.detail?.Content.split(
+        const splitParts = this.detail?.Content?.split(
           /<pre><code class="language-plaintext">|<\/code><\/pre>/
         );
 
         // Thay thế &lt; → < và &gt; → >
         this.innerHTMLData = splitParts
-          .map((part: any) => {
+          ?.map((part: any) => {
             return {
               type: this.getType(part),
               src: part.match(/src="([^"]+)"/)?.[1],
