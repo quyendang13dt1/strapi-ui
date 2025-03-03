@@ -20,6 +20,12 @@ export class ArticleService {
     );
   }
 
+  getArticleDetailRelation(id: string, status?: any) {
+    return this.http.get<any[]>(
+      `${URL_API}articles/${id}?populate=*`
+    );
+  }
+
   getContentTypes() {
     return this.http.get<any[]>(
       `${URL_API}content-types?customPopulate=nested`

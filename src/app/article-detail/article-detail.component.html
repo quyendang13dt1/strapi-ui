@@ -19,7 +19,7 @@
   <div>
     <i class="fa-light fa-calendar-clock"></i> {{detail?.infoLink?.[0]?.Date}}
   </div>
-  @if(detail?.Banner?.url) {
+  @if(detail?.Banner?.url && detailRelation?.content_types?.length === 1 && detailRelation?.content_types?.[0]?.Name === 'Article') {
   <div class="flex justify-center items-center">
     <img class="w-full object-cover" [src]="URL_IMAGE + detail?.Banner?.url" />
   </div>

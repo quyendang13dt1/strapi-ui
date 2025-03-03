@@ -5,6 +5,7 @@ import { URL_IMAGE } from '../app.config';
 import { HtmlRenderComponent } from '../html-render/html-render.component';
 import { IframeComponent } from '../iframe/iframe.component';
 import { ArticleService } from '../service/article.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-article-detail',
@@ -15,6 +16,7 @@ import { ArticleService } from '../service/article.service';
 export class ArticleDetailComponent {
   id!: string;
   detail: any;
+  detailRelation: any;
   URL_IMAGE = URL_IMAGE;
   innerHTMLData: any = [];
   isLoading = false;
@@ -28,13 +30,21 @@ export class ArticleDetailComponent {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
     this.isLoading = true;
-    this._ArticleService
+    combineLatest([
+      this._ArticleService
       .getArticleDetail(
         this.id,
         this._ActivatedRoute.snapshot.queryParamMap.get('status')
+      ),
+      this._ArticleService
+      .getArticleDetailRelation(
+        this.id,
+        this._ActivatedRoute.snapshot.queryParamMap.get('status')
       )
-      .subscribe((rs: any) => {
-        this.detail = rs?.data;
+    ])
+      .subscribe(([rs1, rs2]: any) => {
+        this.detail = rs1.data;
+        this.detailRelation = rs2?.data;
         const splitParts = this.detail?.Content.split(
           /<pre><code class="language-plaintext">|<\/code><\/pre>/
         );
@@ -66,15 +76,15 @@ export class ArticleDetailComponent {
         //     data: `<iframe src=\"https://www.youtube.com/watch?v=flmiFlJVdmA\"></iframe>`,
         //   },
         // ]);
-        console.log('this.innerHTMLData', this.innerHTMLData);
+        console.log('this.innerHTMLData', this.detail, rs2);
         this.isLoading = false;
       });
   }
 
   getType(part: any) {
-    if (part?.includes('iframe')) {
-      return 'iframe';
-    }
+    // if (part?.includes('iframe')) {
+    //   return 'iframe';
+    // }
     return 'html';
   }
 }

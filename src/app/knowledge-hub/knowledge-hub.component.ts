@@ -44,7 +44,8 @@ export class KnowledgeHubComponent {
       this._ArticleService.getArticleList(),
     ]).subscribe(([rs1, rs2, articles]: any) => {
       this.knowLedHubData = rs2?.data;
-      this.listBlog = articles?.data;
+      // this.listBlog = articles?.data;
+   
 
       let objOrder: any = {};
       rs1?.data?.articles
@@ -66,6 +67,11 @@ export class KnowledgeHubComponent {
     });
     this._ArticleService.getContentTypes().subscribe((rs: any) => {
       this.contentTypeData = rs?.data;
+      this.filterData = [...this.contentTypeData].map(x => {
+        x['isSelected'] = true;
+        return x;
+    });
+
     });
   }
 
@@ -81,9 +87,9 @@ export class KnowledgeHubComponent {
   selectFilter(item: any) {
     item['isSelected'] = !item['isSelected'];
     const itemsSelected = this.filterData?.filter((x) => x?.isSelected);
-    const listBlog = this.knowLedHubData.ListBlog?.filter((x: any) =>
+    const listBlog = [...this.listBlog]?.filter((x: any) =>
       x?.content_types?.some((y: any) =>
-        itemsSelected?.map((z) => z?.Text)?.includes(y?.Name)
+        itemsSelected?.map((z) => z?.Name)?.includes(y?.Name)
       )
     );
     setTimeout(() => {
