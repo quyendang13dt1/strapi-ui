@@ -12,9 +12,17 @@ export class ArticleService {
     return this.http.get<any[]>(`${URL_API}articles?populate=*`);
   }
 
-  getArticleDetail(id: string) {
+  getArticleDetail(id: string, status?: any) {
     return this.http.get<any[]>(
-      `${URL_API}articles/${id}?customPopulate=nested`
+      `${URL_API}articles/${id}?customPopulate=nested&${`status=${
+        status ?? ''
+      }`}`
+    );
+  }
+
+  getContentTypes() {
+    return this.http.get<any[]>(
+      `${URL_API}content-types?customPopulate=nested`
     );
   }
 }

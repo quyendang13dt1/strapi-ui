@@ -16,9 +16,14 @@ export class LayoutService {
     return this.http.get<any[]>(`${URL_API}footer?customPopulate=nested`);
   }
 
-  knowledgeHub() {
+  knowledgeHubPopulate(status?: string | any) {
     return this.http.get<any[]>(
-      `${URL_API}knowledge-hubs?customPopulate=nested`
+      `${URL_API}knowledge?populate=*&${`status=${status ?? ''}`}`
+    );
+  }
+  knowledgeHubCustomPopulate(status?: string | any) {
+    return this.http.get<any[]>(
+      `${URL_API}knowledge?customPopulate=nested&${`status=${status ?? ''}`}`
     );
   }
 }

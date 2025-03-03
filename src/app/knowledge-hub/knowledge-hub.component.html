@@ -34,9 +34,9 @@
 </div>
 
 <!-- <app-blog-list [listBlog]="knowLedHubData?.ListBlog"></app-blog-list> -->
-<div class="container flex gap-3 py-5 items-center" *ngIf="knowLedHubData">
+<div class="container flex gap-3 py-5 items-center">
   <div><i class="fa-light fa-filter"></i> Filter:</div>
-  @for (item of filterData; track item) {
+  @for (item of contentTypeData; track item) {
   <div
     class="cursor-pointer"
     (click)="selectFilter(item)"
@@ -50,7 +50,7 @@
       item?.isSelected ? { 'background-color': '#428d57', color: 'white' } : {}
     "
   >
-    {{ item?.Text }}
+    {{ item?.Name }}
   </div>
   }
 </div>
@@ -64,7 +64,7 @@
           @if(!item?.Iframe) {
           <img
             class="h-full object-cover"
-            [src]="URL_IMAGE + item?.Image?.url"
+            [src]="URL_IMAGE + item?.Banner?.formats?.large?.url"
           />
           } @if(item?.Iframe) {
           <app-iframe [src]="item?.Iframe"></app-iframe>

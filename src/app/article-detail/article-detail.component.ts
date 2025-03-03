@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { URL_IMAGE } from '../app.config';
 import { HtmlRenderComponent } from '../html-render/html-render.component';
@@ -17,33 +18,57 @@ export class ArticleDetailComponent {
   URL_IMAGE = URL_IMAGE;
   innerHTMLData: any = [];
   isLoading = false;
+
   constructor(
     private route: ActivatedRoute,
-    private _ArticleService: ArticleService
+    private _ArticleService: ArticleService,
+    private _ActivatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
     this.isLoading = true;
-    this._ArticleService.getArticleDetail(this.id).subscribe((rs: any) => {
-      this.detail = rs?.data;
-      const splitParts = this.detail?.Content.split(
-        /<pre><code class="language-plaintext">|<\/code><\/pre>/
-      );
+    this._ArticleService
+      .getArticleDetail(
+        this.id,
+        this._ActivatedRoute.snapshot.queryParamMap.get('status')
+      )
+      .subscribe((rs: any) => {
+        this.detail = rs?.data;
+        const splitParts = this.detail?.Content.split(
+          /<pre><code class="language-plaintext">|<\/code><\/pre>/
+        );
 
-      // Thay thế &lt; → < và &gt; → >
-      this.innerHTMLData = splitParts
-        .map((part: any) => {
-          return {
-            type: this.getType(part),
-            src: part.match(/src="([^"]+)"/)?.[1],
-            style: part.match(/style="([^"]+)"/)?.[1],
-            data: part.replace(/&lt;/g, '<').replace(/&gt;/g, '>'),
-          };
-        })
-        .filter((x: any) => x?.data);
+        // Thay thế &lt; → < và &gt; → >
+        this.innerHTMLData = splitParts
+          .map((part: any) => {
+            return {
+              type: this.getType(part),
+              src: part.match(/src="([^"]+)"/)?.[1],
+              style: part.match(/style="([^"]+)"/)?.[1],
+              data: part
+                .replace(
+                  /<oembed url="https:\/\/www\.youtube\.com\/watch\?v=([^"]+)"><\/oembed>/g,
+                  `<iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/qLs_Ybqq324" 
+                    frameborder="0" allowfullscreen></iframe>`
+                )
+                .replace('www.youtube.com/watch', 'www.youtube.com/embed'),
+            };
+          })
+          .filter((x: any) => x?.data);
+
+        // this.innerHTMLData = innerHTMLData?.concat([
+        //   {
+        //     type: 'iframe',
+        //     src: 'https://www.youtube.com/watch?v=flmiFlJVdmA',
+        //     style: '',
+        //     data: `<iframe src=\"https://www.youtube.com/watch?v=flmiFlJVdmA\"></iframe>`,
+        //   },
+        // ]);
+        console.log('this.innerHTMLData', this.innerHTMLData);
         this.isLoading = false;
-    });
+      });
   }
 
   getType(part: any) {
